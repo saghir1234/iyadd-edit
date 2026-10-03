@@ -1,28 +1,29 @@
 {
  "fps": 60,
  "canvas": [1080, 1920],
- "direction": "rtl",
+ "direction": "ltr",
  "fonts": [
-  {"family": "UI", "file": "fonts/ui.ttf", "weight": "400"},
-  {"family": "UI", "file": "fonts/ui.ttf", "weight": "700"},
-  {"family": "Display", "file": "fonts/display.ttf", "weight": "700"}
+  {"family": "UI", "file": "fonts/ui400.woff2", "weight": "400"},
+  {"family": "UI", "file": "fonts/ui700.woff2", "weight": "700"},
+  {"family": "Display", "file": "fonts/display.woff2", "weight": "700"}
  ],
- "opening": {"screen": "screens/home.png", "question": "وش ناقص في البيت؟", "font": "Display", "size": 120, "blur": 6},
- "bar": {"rect": [26, 254, 1052, 363], "textEdge": 925, "textCenterY": 309, "fontSize": 31, "font": "UI", "ink": "#1d1f20",
-         "caret": "#16A3B1", "fill": "#ffffff", "hint": [360, 282, 940, 344], "zoom": 1.6},
+ "opening": {"screen": "screens/home.png", "question": "Can't decide what to choose?", "sub": "SHEIN has a wide range of styles and products to explore.",
+             "font": "Display", "size": 60, "subSize": 40, "blur": 6},
+ "bar": {"rect": [126, 175, 850, 270], "textEdge": 160, "textCenterY": 222, "fontSize": 37, "font": "UI", "ink": "#222222",
+         "caret": "#111111", "fill": "#ffffff", "hint": [150, 188, 680, 260], "zoom": 1.3,
+         "home": {"textEdge": 260, "textCenterY": 218, "hint": [248, 176, 735, 260]}},
  "items": [
-  {"id": "item1", "query": "طماطم", "image": "products/item1.png", "screen": "screens/results_item1.png", "tile": [735, 648, 1013, 923], "plus": [773, 915], "into": "bag"},
-  {"id": "item2", "query": "خبز", "image": "products/item2.png", "screen": "screens/results_item2.png", "tile": [751, 598, 1001, 980], "plus": [773, 915], "into": "bag"},
-  {"id": "item3", "query": "قهوة", "image": "products/item3.png", "screen": "screens/results_item3.png", "tile": [734, 1298, 1017, 1563], "plus": [773, 1553], "into": "basket"},
-  {"id": "item4", "query": "شوكولاتة", "image": "products/item4.png", "screen": "screens/results_item4.png", "tile": [723, 731, 1029, 850], "plus": [773, 915], "into": "basket"},
-  {"id": "item5", "query": "بيض", "image": "products/item5.png", "screen": "screens/results_item5.png", "tile": [733, 704, 1019, 922], "plus": [773, 915], "into": "basket"}
+  {"id": "halloween", "query": "halloween deals", "image": "products/halloween.png", "screen": "screens/results_halloween.png", "tile": [548, 497, 1062, 1182], "plus": [1013, 1399], "into": "bag", "heroBox": 640, "holePad": 4},
+  {"id": "shorts", "query": "summer short", "image": "products/shorts.png", "screen": "screens/results_shorts.png", "tile": [16, 838, 531, 1521], "plus": [482, 1732], "into": "bag", "heroBox": 640, "holePad": 4},
+  {"id": "shirts", "query": "shirts", "image": "products/shirts.png", "screen": "screens/results_shirts.png", "tile": [548, 954, 1062, 1638], "plus": [1013, 1839], "into": "bag", "heroBox": 640, "holePad": 4},
+  {"id": "pants", "query": "black pants", "image": "products/pants.png", "screen": "screens/results_pants.png", "tile": [548, 954, 1062, 1638], "plus": [1013, 1893], "into": "bag", "heroBox": 640, "holePad": 4},
+  {"id": "shoes", "query": "red shoes", "image": "products/shoes.png", "screen": "screens/results_shoes.png", "tile": [548, 497, 1062, 1117], "plus": [1013, 1357], "into": "bag", "heroBox": 640, "holePad": 4}
  ],
- "cart": {"x": 492, "y": 1812, "color": "#16A3B1"},
- "bag": {"image": "container/bag.png", "rim": 382, "scale": 0.681, "rest": [540, 1130], "opening": [23, 77, 6, 36]},
- "basket": {"back": "container/basket_back.png", "front": "container/basket_front.png", "size": [1600, 1250], "scale": 0.5, "left": 140, "top": 1150, "rimFront": 427},
+ "bag": {"image": "container/bag.png", "rim": 375, "scale": 0.68, "rest": [540, 1130], "opening": [20, 80, 4, 30]},
  "final": {"screen": "screens/final.png", "holdSec": 1.3},
- "slash": {"color": "#101314", "trail": "#5CC8D7"},
- "voice": {"open": "", "close": ""},
- "ending": {"lines": ["أنت اطلب", "واحنا نوصل"], "accentWord": "", "accent": "#5CC8D7", "sub": "", "font": "Display", "subFont": "UI",
-            "handle": "@your.handle", "platforms": ["instagram", "tiktok", "snapchat", "youtube"]}
+ "slash": {"color": "#111111", "trail": "#7a7a85"},
+ "voice": {"open": "vo/open.wav", "close": "vo/close.wav", "openWords": [0.38, 0.6, 0.95, 1.1, 1.28], "openSub": 2.26, "closeLines": [0.44, 1.76, 3.06]},
+ "ending": {"lines": ["Find your style", "and shop your favorites", "on SHEIN."], "sizes": [104, 70, 124], "accentWord": "", "accent": "#ffffff",
+            "sub": "Personal concept · not an official SHEIN ad", "subSize": 30, "font": "Display", "subFont": "UI",
+            "handle": "@shein by siya", "platforms": [], "markBottom": 0.13}
 }

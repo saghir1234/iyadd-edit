@@ -53,9 +53,10 @@ def build(short):
         best = sorted((d for d in dips if d[0] > parts[0] + 0.1), key=lambda d: -d[1])[:words - 1]   # the deepest dips = word breaks
         ons = V.get('openWords') or [parts[0]] + sorted(t for t, _ in best)                        # or measure by ear and set them
         while len(ons) < words: ons.append(ons[-1] + 0.15)
-        v0 = w0 - ons[0]
+        v0 = max(0.0, w0 - ons[0])
         TL = {'vo_open': v0, 'words': [v0 + o for o in ons]}
         pull0 = v0 + end + 0.08
+        if V.get('openSub') is not None: TL['subAt'] = v0 + V['openSub']
     else:
         TL = {'words': [w0 + i * wstep for i in range(words)]}
         pull0 = w0 + (words - 1) * wstep + (0.45 if short else 0.64)
@@ -111,7 +112,8 @@ def build(short):
     if V.get('close'):                                  # each closing line appears as the voice says it
         parts, _, end = speech(V['close'])
         TL['vo_close'] = TL['endText'] - parts[0]
-        for i in range(min(n_lines, len(parts))): TL['endLines'][i] = TL['vo_close'] + parts[i]
+        marks = V.get('closeLines') or parts
+        for i in range(min(n_lines, len(marks))): TL['endLines'][i] = TL['vo_close'] + marks[i]
         tail = TL['vo_close'] + end
     TL['accounts'] = TL['endLines'][-1] + (0.45 if V.get('close') else 0.26)
     TL['dur'] = round(max(TL['accounts'] + (1.7 if short else 2.4), tail + (0.9 if short else 1.5)), 2)

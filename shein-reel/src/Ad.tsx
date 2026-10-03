@@ -83,22 +83,23 @@ const heroOf = (r: Round, i: number, t: number): Pose => ({x: W / 2, y: H * 0.41
 const B = C.bar;
 const [BX0, BY0, BX1, BY1] = B.rect as number[];
 const BCY = B.textCenterY ?? (BY0 + BY1) / 2;
-const Typed: React.FC<{text: string; caret: number}> = ({text, caret}) => (
-  <div style={{position: 'absolute', ...(RTL ? {right: W - B.textEdge} : {left: B.textEdge}), top: BCY - 40, height: 80, display: 'flex', alignItems: 'center',
+const HB: any = {...B, ...(B.home ?? {})};
+const Typed: React.FC<{text: string; caret: number; bar?: any}> = ({text, caret, bar = B}) => (
+  <div style={{position: 'absolute', ...(RTL ? {right: W - bar.textEdge} : {left: bar.textEdge}), top: (bar.textCenterY ?? BCY) - 40, height: 80, display: 'flex', alignItems: 'center',
     direction: RTL ? 'rtl' : 'ltr', font: `400 ${B.fontSize}px ${B.font}`, color: B.ink, whiteSpace: 'nowrap'}}>
     <span>{text}</span>
     <span style={{width: 3, height: B.fontSize * 1.2, borderRadius: 2, background: B.caret, marginInlineStart: text ? 3 : 0, opacity: caret}} />
   </div>
 );
 const caretBlink = (t: number) => (Math.floor(t * 2.2) % 2 === 0 ? 1 : 0);
-const Hint: React.FC<{o: number}> = ({o}) => {
-  const [x0, y0, x1, y1] = B.hint;
+const Hint: React.FC<{o: number; bar?: any}> = ({o, bar = B}) => {
+  const [x0, y0, x1, y1] = bar.hint;
   return <div style={{position: 'absolute', left: x0, top: y0, width: x1 - x0, height: y1 - y0, background: B.fill, opacity: o}} />;
 };
 const Screen: React.FC<{src: string}> = ({src}) => <Img src={staticFile(src)} style={{position: 'absolute', left: 0, top: 0, width: W, height: H, objectFit: 'cover'}} />;
 
 const Home: React.FC<{hint: number; children?: React.ReactNode}> = ({hint, children}) => (
-  <AbsoluteFill style={{background: '#fff'}}><Screen src={C.opening.screen} /><Hint o={hint} />{children}</AbsoluteFill>
+  <AbsoluteFill style={{background: '#fff'}}><Screen src={C.opening.screen} /><Hint o={hint} bar={HB} />{children}</AbsoluteFill>
 );
 const Results: React.FC<{id: string; query: string; caret?: number; hole?: boolean; cart?: number; bump?: number}> = ({id, query, caret = 0, hole = false, cart = 0, bump = 1}) => {
   const it = ITEM[id], src = staticFile(it.screen);
@@ -376,7 +377,7 @@ const EndText: React.FC<{t: number}> = ({t}) => {
     <>
       <div style={{position: 'absolute', left: 60, right: 60, top: H * 0.333, textAlign: 'center', direction: RTL ? 'rtl' : 'ltr', color: '#fff'}}>
         {(E.lines as string[]).map((s, i) => <div key={i} style={{font: `700 ${(E.sizes ?? [])[i] ?? E.size ?? 150}px/1.18 ${E.font}`, textShadow: '0 6px 30px rgba(0,0,0,.35)', ...line(TL.endLines[i])}}>{accent(s)}</div>)}
-        {E.sub && <div style={{font: `400 52px/1.4 ${E.subFont ?? E.font}`, color: '#EEF3F4', marginTop: 34, ...line(TL.endLines[TL.endLines.length - 1] + 0.16)}}>{E.sub}</div>}
+        {E.sub && <div style={{font: `400 ${E.subSize ?? 52}px/1.4 ${E.subFont ?? E.font}`, color: '#EEF3F4', marginTop: 34, ...line(TL.endLines[TL.endLines.length - 1] + 0.16)}}>{E.sub}</div>}
       </div>
       {E.handle && (
         <div style={{position: 'absolute', left: 0, right: 0, top: H * 0.672, display: 'flex', justifyContent: 'center', alignItems: 'center', gap: 22, direction: 'ltr', ...line(TL.accounts)}}>
@@ -402,18 +403,23 @@ const Film: React.FC = () => {
     if (t >= T.enter) { const d = eIn(prog(t, T.enter, T.cut)); camStyle = diveCam(d); diveBlur = lerp(0, 18, d); }
     const n = t >= T.type - 0.02 ? clamp(Math.floor((t - T.type) / T.step) + 1, 0, [...T.q].length) : -1;
     const qp = push, qSize = lerp(O.size ?? 120, B.fontSize * ZOOM, qp);
-    const edge = (RTL ? W - B.textEdge : B.textEdge) * ZOOM;             // where the bar text sits, from the anchored edge
+    const edge = (RTL ? W - HB.textEdge : HB.textEdge) * ZOOM;             // where the bar text sits, from the anchored edge
     const qCol = `rgba(${lerp(11, 120, qp)},${lerp(20, 120, qp)},${lerp(22, 120, qp)},1)`;
     const words = (O.question as string).split(' ');
     return (
       <AbsoluteFill style={{background: '#fff', overflow: 'hidden'}}>
         <AbsoluteFill style={{...camStyle, filter: `blur(${lerp(O.blur ?? 6, 0, prog(t, TL.pull[0], TL.pull[0] + 0.5)) + diveBlur}px)`}}>
-          <Home hint={prog(t, TL.pull[0] + 0.25, TL.pull[0] + 0.5)}>{n >= 0 && <Typed text={[...T.q].slice(0, n).join('')} caret={t < T.enter ? caretBlink(t - T.type) : 0} />}</Home>
+          <Home hint={prog(t, TL.pull[0] + 0.25, TL.pull[0] + 0.5)}>{n >= 0 && <Typed bar={HB} text={[...T.q].slice(0, n).join('')} caret={t < T.enter ? caretBlink(t - T.type) : 0} />}</Home>
         </AbsoluteFill>
         <AbsoluteFill style={{opacity: 1 - prog(t, TL.pull[0], TL.pull[0] + 0.4),
           background: 'radial-gradient(ellipse 70% 30% at 50% 50%, rgba(255,255,255,.82) 0, rgba(255,255,255,.35) 55%, rgba(255,255,255,0) 100%)'}} />
+        {O.sub && TL.subAt != null && (
+          <div style={{position: 'absolute', left: 70, right: 70, top: H / 2 + 120, textAlign: 'center', font: `600 ${O.subSize ?? 40}px/1.3 ${O.font}`, color: '#0b1416',
+            opacity: clamp(spring(t, TL.subAt, 2.2, 0.75) * 1.3) * (1 - prog(t, TL.pull[0], TL.pull[0] + 0.35)), transform: `translateY(${(1 - clamp(spring(t, TL.subAt, 2.2, 0.75), 0, 1.1)) * 36}px)`,
+            textShadow: '0 0 24px rgba(255,255,255,.95), 0 0 10px rgba(255,255,255,.9)'}}>{O.sub}</div>
+        )}
         {t < T.type && (
-          <div style={{position: 'absolute', top: lerp(H / 2, BCY, qp), [RTL ? 'right' : 'left']: `calc(${(1 - qp) * 50}% + ${qp * edge}px)`,
+          <div style={{position: 'absolute', top: lerp(H / 2, HB.textCenterY ?? BCY, qp), [RTL ? 'right' : 'left']: `calc(${(1 - qp) * 50}% + ${qp * edge}px)`,
             transform: `translate(${(RTL ? 1 : -1) * (1 - qp) * 50}%, -50%)`, display: 'flex', gap: qSize * 0.22, direction: RTL ? 'rtl' : 'ltr',
             font: `700 ${qSize}px ${O.font}`, color: qCol, whiteSpace: 'nowrap', opacity: 1 - prog(t, T.type - 0.14, T.type - 0.04), lineHeight: 1.25,
             textShadow: [28, 28, 14, 6].map((r) => `0 0 ${r * lerp(1, 0.4, qp)}px rgba(255,255,255,${1 - prog(qp, 0.78, 1)})`).join(', ')}}>
@@ -452,7 +458,7 @@ const Mark: React.FC<{t: number}> = ({t}) => {
   const o = 1 - prog(t, TL.accounts - 0.15, TL.accounts + 0.25);
   if (o <= 0) return null;
   return (
-    <div style={{position: 'absolute', left: 0, right: 0, bottom: H * 0.054, display: 'flex', justifyContent: 'center', opacity: o * 0.9}}>
+    <div style={{position: 'absolute', left: 0, right: 0, bottom: H * (E.markBottom ?? 0.054), display: 'flex', justifyContent: 'center', opacity: o * 0.9}}>
       <div style={{display: 'flex', alignItems: 'center', gap: 10, direction: 'ltr', padding: '8px 18px', borderRadius: 30, background: 'rgba(10,14,16,.38)'}}>
         {(E.platforms ?? []).map((k: string) => <svg key={k} width="24" height="24" viewBox="0 0 24 24"><path d={ICON[k]} fill="#fff" /></svg>)}
         <span style={{font: `700 26px ${E.subFont ?? E.font}`, color: '#fff', marginLeft: 4}}>{E.handle}</span>

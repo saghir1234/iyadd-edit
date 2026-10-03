@@ -3,3 +3,11 @@ out/
 public/screens/
 public/products/
 storyboard.html
+public/brand/
+public/container/
+public/mix*.wav
+sfx/raw/
+sfx/kit/
+sfx/.raw_*
+sfx/*_cues.json
+vo/*_orig.wav

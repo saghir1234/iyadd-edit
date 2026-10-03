@@ -1,0 +1,14 @@
+{
+ "key1": {"file": "raw/typing.mp3", "near": 0.49, "dur": 0.075, "search": 0.08},
+ "key2": {"file": "raw/typing.mp3", "near": 1.67, "dur": 0.075, "search": 0.08},
+ "key3": {"file": "raw/typing.mp3", "near": 1.87, "dur": 0.075, "search": 0.08},
+ "key4": {"file": "raw/typing.mp3", "near": 2.70, "dur": 0.075, "search": 0.08},
+ "air": {"file": "raw/air.mp3", "near": 0.31, "dur": 1.1, "fade": 0.3, "rel": 0.05, "search": 0.1},
+ "dive": {"file": "raw/dive.mp3", "near": 0.06, "dur": 0.9, "fade": 0.3, "rel": 0.05, "search": 0.2},
+ "bag_rise": {"file": "raw/bag_a.mp3", "near": 1.28, "dur": 0.55, "fade": 0.15, "rel": 0.02, "search": 0.05},
+ "bag_in": {"file": "raw/bag_d.mp3", "near": 0.26, "dur": 0.45, "fade": 0.12, "rel": 0.1, "search": 0.05},
+ "lift": {"file": "raw/bag_c.mp3", "near": 1.08, "dur": 1.0, "fade": 0.3, "rel": 0.1, "search": 0.1},
+ "dagger": {"file": "raw/dagger.mp3", "near": 0.05, "dur": 0.27, "fade": 0.06, "search": 0.1},
+ "deep": {"file": "raw/deep.mp3", "near": 0.05, "dur": 3.0, "fade": 1.2, "rel": 0.05, "search": 0.1},
+ "low": {"file": "raw/low.mp3", "near": 0.05, "dur": 1.0, "fade": 0.5, "rel": 0.05, "search": 0.1}
+}
