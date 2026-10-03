@@ -4,7 +4,7 @@ set -e
 cd "$(dirname "$0")/.."
 if [ "$1" = short ]; then COMP=AppAdShort; MIX=public/mix_short.wav; OUT=out/final_short.mp4; else COMP=AppAd; MIX=public/mix.wav; OUT=out/final.mp4; fi
 mkdir -p out
-npx remotion render $COMP out/.silent.mp4 --codec h264 --video-bitrate 14M --image-format png --muted --color-space bt709 --log=error --browser-executable "$CHROME_PATH" --gl=swangle
+npx remotion render $COMP out/.silent.mp4 --codec h264 --video-bitrate 14M --image-format png --muted --color-space bt709 --log=info --browser-executable "$CHROME_PATH" --gl=swangle
 if [ -f "$MIX" ]; then
   ffmpeg -y -v error -i out/.silent.mp4 -i "$MIX" -map 0:v -map 1:a -c:v copy \
     -bsf:v "h264_metadata=colour_primaries=1:transfer_characteristics=1:matrix_coefficients=1:video_full_range_flag=0" \

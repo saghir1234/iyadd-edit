@@ -1,5 +1,5 @@
 {
- "fps": 60,
+ "fps": 30,
  "canvas": [1080, 1920],
  "direction": "ltr",
  "fonts": [

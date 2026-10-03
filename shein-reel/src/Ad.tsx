@@ -474,7 +474,7 @@ export const Ad: React.FC<{tl?: any; mix?: string}> = ({tl = TL_FULL, mix = 'mix
   return (
     <TLCtx.Provider value={tl}>
       <AbsoluteFill style={{background: '#fff'}}>
-        {env.isRendering && fast ? <CameraMotionBlur shutterAngle={200} samples={8}><Film /></CameraMotionBlur> : <Film />}
+        {env.isRendering && fast ? <CameraMotionBlur shutterAngle={200} samples={5}><Film /></CameraMotionBlur> : <Film />}
         <Mark t={t} />
         {!env.isRendering && tl.hasMix && <Audio src={staticFile(mix)} />}
       </AbsoluteFill>
