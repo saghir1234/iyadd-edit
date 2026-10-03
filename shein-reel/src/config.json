@@ -1,0 +1,28 @@
+{
+ "fps": 60,
+ "canvas": [1080, 1920],
+ "direction": "rtl",
+ "fonts": [
+  {"family": "UI", "file": "fonts/ui.ttf", "weight": "400"},
+  {"family": "UI", "file": "fonts/ui.ttf", "weight": "700"},
+  {"family": "Display", "file": "fonts/display.ttf", "weight": "700"}
+ ],
+ "opening": {"screen": "screens/home.png", "question": "وش ناقص في البيت؟", "font": "Display", "size": 120, "blur": 6},
+ "bar": {"rect": [26, 254, 1052, 363], "textEdge": 925, "textCenterY": 309, "fontSize": 31, "font": "UI", "ink": "#1d1f20",
+         "caret": "#16A3B1", "fill": "#ffffff", "hint": [360, 282, 940, 344], "zoom": 1.6},
+ "items": [
+  {"id": "item1", "query": "طماطم", "image": "products/item1.png", "screen": "screens/results_item1.png", "tile": [735, 648, 1013, 923], "plus": [773, 915], "into": "bag"},
+  {"id": "item2", "query": "خبز", "image": "products/item2.png", "screen": "screens/results_item2.png", "tile": [751, 598, 1001, 980], "plus": [773, 915], "into": "bag"},
+  {"id": "item3", "query": "قهوة", "image": "products/item3.png", "screen": "screens/results_item3.png", "tile": [734, 1298, 1017, 1563], "plus": [773, 1553], "into": "basket"},
+  {"id": "item4", "query": "شوكولاتة", "image": "products/item4.png", "screen": "screens/results_item4.png", "tile": [723, 731, 1029, 850], "plus": [773, 915], "into": "basket"},
+  {"id": "item5", "query": "بيض", "image": "products/item5.png", "screen": "screens/results_item5.png", "tile": [733, 704, 1019, 922], "plus": [773, 915], "into": "basket"}
+ ],
+ "cart": {"x": 492, "y": 1812, "color": "#16A3B1"},
+ "bag": {"image": "container/bag.png", "rim": 382, "scale": 0.681, "rest": [540, 1130], "opening": [23, 77, 6, 36]},
+ "basket": {"back": "container/basket_back.png", "front": "container/basket_front.png", "size": [1600, 1250], "scale": 0.5, "left": 140, "top": 1150, "rimFront": 427},
+ "final": {"screen": "screens/final.png", "holdSec": 1.3},
+ "slash": {"color": "#101314", "trail": "#5CC8D7"},
+ "voice": {"open": "", "close": ""},
+ "ending": {"lines": ["أنت اطلب", "واحنا نوصل"], "accentWord": "", "accent": "#5CC8D7", "sub": "", "font": "Display", "subFont": "UI",
+            "handle": "@your.handle", "platforms": ["instagram", "tiktok", "snapchat", "youtube"]}
+}

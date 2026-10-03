@@ -1,0 +1,120 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>html,body{margin:0;background:transparent}canvas{display:block}</style>
+<script type="importmap">{"imports":{"three":"/node_modules/three/build/three.module.js","three/addons/":"/node_modules/three/examples/jsm/"}}</script>
+</head><body><canvas id="c" width="1600" height="1250"></canvas>
+<script type="module">
+// A supermarket hand basket (modelled on the classic plastic one): tapered walls with real slots, a thick rim,
+// handles folded down on the long sides, and a label in the brand colour with the brand logo.
+// Rendered in layers (inside / front) so items can really go inside. Colours and logo come from the URL.
+import * as THREE from 'three';
+import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
+const cv = document.getElementById('c');
+const R = new THREE.WebGLRenderer({ canvas: cv, antialias: true, alpha: true, preserveDrawingBuffer: true });
+R.setPixelRatio(1); R.setSize(1600, 1250, false);
+R.outputColorSpace = THREE.SRGBColorSpace; R.toneMapping = THREE.ACESFilmicToneMapping; R.toneMappingExposure = 1.05;
+R.localClippingEnabled = true; R.setClearColor(0x000000, 0);
+const scene = new THREE.Scene();
+scene.environment = new THREE.PMREMGenerator(R).fromScene(new RoomEnvironment(), 0.04).texture;
+scene.environmentIntensity = 0.9;
+const key = new THREE.DirectionalLight(0xffffff, 1.6); key.position.set(-30, 60, 50); scene.add(key);
+const rimL = new THREE.DirectionalLight(0xcff6fb, 0.8); rimL.position.set(40, 30, -40); scene.add(rimL);
+
+const L1 = 44, W1 = 30, L0 = 37, W0 = 24, H = 21, T = 0.55;       // top/bottom outer size, height, wall thickness
+const plastic = (c) => new THREE.MeshPhysicalMaterial({ color: c, roughness: 0.42, metalness: 0, clearcoat: 0.35, clearcoatRoughness: 0.35, side: THREE.DoubleSide });
+const Q = new URLSearchParams(location.search);
+const BODY = parseInt(Q.get('body') || '17191b', 16), LABEL_C = '#' + (Q.get('label') || 'ffffff'), LOGO = Q.get('logo');
+const BLACK = plastic(BODY), INSIDE = new THREE.MeshStandardMaterial({ color: new THREE.Color(BODY).multiplyScalar(0.7), roughness: 0.85 });
+
+function rrect(s, x, y, w, h, r, hole = false) {
+  const p = hole ? new THREE.Path() : s;
+  p.moveTo(x + r, y); p.lineTo(x + w - r, y); p.quadraticCurveTo(x + w, y, x + w, y + r); p.lineTo(x + w, y + h - r);
+  p.quadraticCurveTo(x + w, y + h, x + w - r, y + h); p.lineTo(x + r, y + h); p.quadraticCurveTo(x, y + h, x, y + h - r);
+  p.lineTo(x, y + r); p.quadraticCurveTo(x, y, x + r, y); return p;
+}
+// a wall: trapezoid (bottom width b, top width t, slant height s) with rows of slots; optional solid label area
+function wall(b, t, s, cols, label) {
+  const sh = new THREE.Shape();
+  sh.moveTo(-b / 2, 0); sh.lineTo(b / 2, 0); sh.lineTo(t / 2, s); sh.lineTo(-t / 2, s); sh.lineTo(-b / 2, 0);
+  const rows = [[0.14, 0.44], [0.52, 0.86]];
+  for (const [y0, y1] of rows) {
+    const ya = s * y0, yb = s * y1;
+    const wAt = (y) => b + (t - b) * (y / s);
+    const inner = wAt(ya) - 5.0;                       // keep solid corners
+    const pitch = inner / cols, sw = pitch * 0.46;
+    for (let i = 0; i < cols; i++) {
+      const cx = -inner / 2 + pitch * (i + 0.5);
+      if (label && Math.abs(cx) < label.w / 2 + sw && y0 < 0.5 === label.low) continue;
+      sh.holes.push(rrect(null, cx - sw / 2, ya, sw, yb - ya, sw / 2, true));
+    }
+  }
+  const g = new THREE.ExtrudeGeometry(sh, { depth: T, bevelEnabled: true, bevelThickness: 0.12, bevelSize: 0.1, bevelSegments: 2, curveSegments: 6 });
+  g.translate(0, 0, -T / 2); return g;
+}
+const tilt = (dz) => Math.atan2(dz, H);
+const basket = new THREE.Group(); scene.add(basket);
+const parts = { front: [], back: [], rimFront: null };
+function placeWall(geo, pos, rotY, lean) {
+  const m = new THREE.Mesh(geo, BLACK); m.position.copy(pos); m.rotation.order = 'YXZ'; m.rotation.y = rotY; m.rotation.x = -lean; basket.add(m); return m;
+}
+const sF = Math.hypot(H, (W1 - W0) / 2), sS = Math.hypot(H, (L1 - L0) / 2);
+const LABEL = { w: 15, low: true };
+const front = placeWall(wall(L0, L1, sF, 13, LABEL), new THREE.Vector3(0, 0, W0 / 2), 0, -tilt((W1 - W0) / 2));
+const back = placeWall(wall(L0, L1, sF, 13, null), new THREE.Vector3(0, 0, -W0 / 2), Math.PI, -tilt((W1 - W0) / 2));
+const left = placeWall(wall(W0, W1, sS, 9, null), new THREE.Vector3(-L0 / 2, 0, 0), -Math.PI / 2, -tilt((L1 - L0) / 2));
+const right = placeWall(wall(W0, W1, sS, 9, null), new THREE.Vector3(L0 / 2, 0, 0), Math.PI / 2, -tilt((L1 - L0) / 2));
+parts.front.push(front); parts.back.push(back, left, right);
+// floor
+const fl = new THREE.Mesh(new THREE.BoxGeometry(L0, 0.8, W0), INSIDE); fl.position.y = 0.4; basket.add(fl); parts.back.push(fl);
+// corner posts (rounded corners)
+for (const [sx, sz] of [[-1, 1], [1, 1], [-1, -1], [1, -1]]) {
+  const a = new THREE.Vector3(sx * L0 / 2, 0, sz * W0 / 2), b = new THREE.Vector3(sx * L1 / 2, H, sz * W1 / 2);
+  const c = new THREE.Mesh(new THREE.CylinderGeometry(1.25, 1.25, a.distanceTo(b), 20), BLACK);
+  c.position.copy(a).add(b).multiplyScalar(0.5); c.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), b.clone().sub(a).normalize());
+  basket.add(c); (sz > 0 ? parts.front : parts.back).push(c);
+}
+// rim: thick rounded frame on top, a little wider than the walls
+const rimShape = rrect(new THREE.Shape(), -L1 / 2 - 1.3, -W1 / 2 - 1.3, L1 + 2.6, W1 + 2.6, 3.2);
+rimShape.holes.push(rrect(null, -L1 / 2 + 0.6, -W1 / 2 + 0.6, L1 - 1.2, W1 - 1.2, 2.2, true));
+const rimG = new THREE.ExtrudeGeometry(rimShape, { depth: 1.5, bevelEnabled: true, bevelThickness: 0.35, bevelSize: 0.35, bevelSegments: 3, curveSegments: 10 });
+rimG.rotateX(Math.PI / 2); rimG.translate(0, H + 1.2, 0);
+const rim = new THREE.Mesh(rimG, BLACK); basket.add(rim); parts.back.push(rim);
+// the front part of the rim, drawn again over the items
+const frontClip = new THREE.Plane(new THREE.Vector3(0, 0, 1), -(W1 / 2 - 1.2));
+const rimF = new THREE.Mesh(rimG, BLACK.clone()); rimF.material.clippingPlanes = [frontClip]; basket.add(rimF); parts.front.push(rimF);
+// handles folded down on the long sides (glossy black bar with a grip)
+const HM = new THREE.MeshPhysicalMaterial({ color: 0x0c0d0e, roughness: 0.25, clearcoat: 0.8, clearcoatRoughness: 0.15 });
+function handle(sz) {
+  const z0 = sz * (W1 / 2 + 1.0), drop = 8.5;
+  const pts = [[-16, H + 0.6, z0], [-17.5, H - 3, z0 + sz * 0.6], [-14, H - drop, z0 + sz * 1.1], [14, H - drop, z0 + sz * 1.1], [17.5, H - 3, z0 + sz * 0.6], [16, H + 0.6, z0]].map((p) => new THREE.Vector3(...p));
+  const curve = new THREE.CatmullRomCurve3(pts, false, 'catmullrom', 0.2);
+  const m = new THREE.Mesh(new THREE.TubeGeometry(curve, 120, 0.85, 16, false), HM); basket.add(m);
+  return m;
+}
+parts.front.push(handle(1)); parts.back.push(handle(-1));
+// the label: a plate in the brand colour with the brand logo, on the solid part of the front wall
+let tex = null;
+if (LOGO) { tex = new THREE.TextureLoader().load(LOGO, () => (window.ready = true)); tex.colorSpace = THREE.SRGBColorSpace; tex.anisotropy = 8; } else window.ready = true;
+const cvs = document.createElement('canvas'); cvs.width = 1024; cvs.height = 440;
+function labelTex() {
+  const g = cvs.getContext('2d'); g.fillStyle = LABEL_C; g.beginPath(); g.roundRect(0, 0, 1024, 440, 70); g.fill();
+  if (tex) { const img = tex.image, w = 760, h = w * img.height / img.width; g.drawImage(img, (1024 - w) / 2, (440 - h) / 2, w, h); }
+  const t = new THREE.CanvasTexture(cvs); t.colorSpace = THREE.SRGBColorSpace; t.anisotropy = 8; return t;
+}
+let labelMesh = null;
+function addLabel() {
+  const m = new THREE.Mesh(new THREE.PlaneGeometry(14, 14 * 440 / 1024), new THREE.MeshStandardMaterial({ map: labelTex(), roughness: 0.4, toneMapped: false }));
+  m.position.set(0, sF * 0.29, 0.5); front.add(m); labelMesh = m;
+}
+const cam = new THREE.PerspectiveCamera(26, 1600 / 1250, 1, 1000);
+cam.position.set(0, 52, 96); cam.lookAt(0, 8.5, 0);
+window.renderLayer = (which) => {
+  if (!labelMesh) addLabel();
+  basket.traverse((o) => { if (o.isMesh) o.visible = true; });
+  if (which === 'back') { for (const o of parts.front) o.visible = false; }
+  if (which === 'front') { basket.traverse((o) => { if (o.isMesh) o.visible = false; }); for (const o of parts.front) o.visible = true; labelMesh.visible = true; }
+  R.render(scene, cam);
+  // where do the rim corners land on screen? (for placing items)
+  const P = (x, y, z) => { const v = new THREE.Vector3(x, y, z).project(cam); return [Math.round((v.x + 1) / 2 * 1600), Math.round((1 - v.y) / 2 * 1250)]; };
+  return { rimFL: P(-L1 / 2, H + 1.2, W1 / 2), rimFR: P(L1 / 2, H + 1.2, W1 / 2), rimBL: P(-L1 / 2, H + 1.2, -W1 / 2), rimBR: P(L1 / 2, H + 1.2, -W1 / 2), floorC: P(0, 0.8, 0), frontBottom: P(0, 0, W0 / 2) };
+};
+</script></body></html>

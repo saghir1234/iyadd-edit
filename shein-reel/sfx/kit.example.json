@@ -1,0 +1,18 @@
+{
+ "key1": {"file": "raw/iphone_typing.mp3", "near": 0.67, "dur": 0.075, "search": 0.14},
+ "key2": {"file": "raw/iphone_typing.mp3", "near": 0.97, "dur": 0.075, "search": 0.14},
+ "key3": {"file": "raw/iphone_typing.mp3", "near": 1.39, "dur": 0.075, "search": 0.14},
+ "key4": {"file": "raw/iphone_typing.mp3", "near": 1.57, "dur": 0.075, "search": 0.14},
+ "air": {"file": "raw/thin_swoosh.mp3", "near": 0.06, "dur": 1.1, "fade": 0.3, "rel": 0.05, "search": 1.4},
+ "dive": {"file": "raw/soft_air_whoosh.mp3", "near": 0.06, "dur": 1.2, "fade": 0.35, "rel": 0.05, "search": 1.4},
+ "bag_rise": {"file": "raw/plastic_bag.mp3", "near": 1.5, "dur": 0.55, "fade": 0.15, "rel": 0.02, "search": 0.05},
+ "bag_in": {"file": "raw/drop_filled_plastic_bag.mp3", "near": 0.06, "dur": 0.45, "fade": 0.12, "rel": 0.1, "search": 0.44},
+ "lift": {"file": "raw/picking_up_plastic_bag.mp3", "near": 1.56, "dur": 1.0, "fade": 0.3, "rel": 0.1, "search": 0.2},
+ "dagger": {"file": "raw/whoosh_dagger.mp3", "near": 0.06, "dur": 0.27, "fade": 0.06, "search": 0.2},
+ "deep": {"file": "raw/deep_impact.mp3", "near": 0.06, "dur": 3.6, "fade": 1.2, "rel": 0.05, "search": 0.94},
+ "low": {"file": "raw/low_hit.mp3", "near": 0.06, "dur": 2.0, "fade": 0.8, "rel": 0.05, "search": 0.44},
+ "box1": {"file": "raw/cardboard_box_drop.mp3", "near": 0.87, "dur": 0.32, "fade": 0.12, "search": 0.13},
+ "box2": {"file": "raw/cardboard_box_drop.mp3", "near": 1.41, "dur": 0.32, "fade": 0.12, "search": 0.13},
+ "box3": {"file": "raw/cardboard_box_drop.mp3", "near": 8.13, "dur": 0.32, "fade": 0.12, "search": 0.13},
+ "knock": {"file": "raw/plastic_box.mp3", "near": 5.17, "dur": 0.3, "fade": 0.12, "search": 0.08}
+}

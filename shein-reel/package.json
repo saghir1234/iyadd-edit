@@ -1,0 +1,25 @@
+{
+  "name": "motion-reel-app-ad",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "timeline": "python3 scripts/timeline.py",
+    "studio": "remotion studio",
+    "render": "remotion render AppAd out/silent.mp4 --codec h264 --video-bitrate 14M --image-format png --muted --color-space bt709",
+    "render:short": "remotion render AppAdShort out/silent_short.mp4 --codec h264 --video-bitrate 14M --image-format png --muted --color-space bt709"
+  },
+  "dependencies": {
+    "@remotion/bundler": "4.0.527",
+    "@remotion/cli": "4.0.527",
+    "@remotion/motion-blur": "4.0.527",
+    "@remotion/renderer": "4.0.527",
+    "remotion": "4.0.527",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1"
+  },
+  "devDependencies": {
+    "playwright": "^1.47.0",
+    "three": "0.170.0"
+  }
+}
