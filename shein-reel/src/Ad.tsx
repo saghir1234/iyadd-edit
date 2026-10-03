@@ -209,12 +209,12 @@ const inBasket = (p: Pose, c: {x: number; y: number}, rot: number): Pose => {
 const ZOOM = B.zoom ?? 1.6;
 const AX = RTL ? W : 0;                                 // the bar's outer edge stays put, so the logo is never cropped
 const DIVE_X = RTL ? B.textEdge - B.fontSize * 1.8 : B.textEdge + B.fontSize * 1.8;
-const diveCam = (d: number) => cam(lerp(ZOOM, 11, d), DIVE_X, BCY, AX + (DIVE_X - AX) * ZOOM, BCY);
+const diveCam = (d: number) => cam(lerp(ZOOM, 11, d), DIVE_X, BCY, AX + (DIVE_X - AX) * ZOOM, BCY * ZOOM + (BCY - BCY * ZOOM) * eIn(d));
 
 const SearchBeat: React.FC<{t: number; r: Round; prev: Round; n0: number}> = ({t, r, prev, n0}) => {
   const n = t < r.type ? 0 : clamp(Math.floor((t - r.type) / r.step) + 1, 0, [...r.q].length);
   const text = t < (r.clear ?? 0) ? prev.q : [...r.q].slice(0, n).join('');
-  let camStyle = cam(ZOOM, AX, BCY), blur = 0;
+  let camStyle = cam(ZOOM, AX, BCY, AX, BCY * ZOOM), blur = 0;
   if (t >= r.enter) { const d = eIn(prog(t, r.enter, r.cut)); camStyle = diveCam(d); blur = lerp(0, 18, d); }
   return (
     <AbsoluteFill style={{background: '#fff', overflow: 'hidden'}}>
@@ -399,7 +399,7 @@ const Film: React.FC = () => {
     // their home screen, lightly blurred; the question appears, then shrinks into their bar in place of its hint
     const push = eIO(prog(t, TL.pull[0], TL.pull[1]));
     const s = lerp(lerp(1, 1.03, prog(t, 0, TL.pull[0])), ZOOM, push);
-    let camStyle = cam(s, AX, BCY), diveBlur = 0;
+    let camStyle = cam(s, AX, BCY, AX, BCY * s), diveBlur = 0;
     if (t >= T.enter) { const d = eIn(prog(t, T.enter, T.cut)); camStyle = diveCam(d); diveBlur = lerp(0, 18, d); }
     const n = t >= T.type - 0.02 ? clamp(Math.floor((t - T.type) / T.step) + 1, 0, [...T.q].length) : -1;
     const qp = push, qSize = lerp(O.size ?? 120, B.fontSize * ZOOM, qp);
