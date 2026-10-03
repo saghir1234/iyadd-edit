@@ -4,16 +4,16 @@ D='/tmp/claude-0/-home-user-iyadd-edit/9688f4a2-8efe-546e-9350-d51722e3cc93/imag
 def b64(img, q=82, w=None):
     if w: img = img.resize((w, int(img.height*w/img.width)))
     buf = io.BytesIO(); img.convert('RGB').save(buf, 'JPEG', quality=q); return 'data:image/jpeg;base64,'+base64.b64encode(buf.getvalue()).decode()
-scr = {k: Image.open(D+f'{n}.webp') for k, n in [('shorts',1),('shirts',3),('halloween',4),('shoes',5)]}
+scr = {k: Image.open(D+f'{n}.webp') for k, n in [('shorts',1),('shirts',3),('halloween',4),('shoes',5),('pants',6),('home',7),('cart',8)]}
 S = {k: b64(v, w=360) for k, v in scr.items()}
 # product tiles (photo only: above the price bars/badges), in the screenshot's 923x2000 pixels
-tiles = {'shorts': (14,716,454,1300), 'shirts': (468,815,908,1400), 'halloween': (468,425,908,1010), 'shoes': (468,425,908,955)}
+tiles = {'shorts': (14,716,454,1300), 'shirts': (468,815,908,1400), 'halloween': (468,425,908,1010), 'shoes': (468,425,908,955), 'pants': (468,815,908,1400)}
 T = {k: b64(scr[k].crop(tiles[k]), w=300) for k in tiles}
 bar = {k: b64(scr[k].crop((0,110,923,260)), w=360) for k in scr}
 def frame(inner, cls=''): return f'<div class="fr {cls}">{inner}</div>'
 def img(src, c=''): return f'<img src="{src}" class="{c}">'
 beats = [
- ('1. Open on the home screen', '0.0 – 1.2 s', frame('<div class="ph">SHEIN home screen<br><small>NEEDED from you</small></div><div class="q">Can’t decide<br>what to choose?</div>', 'blur'),
+ ('1. Open on the home screen', '0.0 – 1.2 s', frame(img(S['home'],'scr')+'<div class="q">Can’t decide<br>what to choose?</div>', 'blur'),
   'SHEIN’s own home screen, lightly blurred so people know the brand in the first second. The question fades in word by word as the voice says it.',
   'Slow push in.', 'One deep hit.', '“Can’t decide what to choose?”'),
  ('2. The question drops into the search bar', '1.2 – 2.4 s', frame(img(bar['halloween'],'bar')+'<div class="q small">Can’t decide…</div>'),
@@ -24,10 +24,10 @@ beats = [
   'The results page opens. The tile’s photo lifts out of its exact place, grows big and is held for about a second. Prices, “after coupon” lines and discount badges are covered or cropped. Nothing about price is shown.', 'Push toward the tile.', 'Soft whoosh on the lift.', ''),
  ('5. Into the bag', '5.6 – 6.6 s', frame('<div class="bag">SHEIN bag<br><small>see decision B</small></div>'+img(T['halloween'],'drop')),
   'The product drops into the bag and disappears inside it. Nothing hangs on top. The bag takes the weight. Every item enters the same way.', 'Wide, then a closer cut at the mouth.', 'Bag rustle, then a filled-bag landing.', ''),
- ('6. Items 2 to 5, same method', '6.6 – 17 s', ''.join(img(T[k],'mini') for k in ['shorts','shirts','shoes'])+'<div class="mini miss">black pants<br><small>NEEDED</small></div>',
+ ('6. Items 2 to 5, same method', '6.6 – 17 s', ''.join(img(T[k],'mini') for k in ['shorts','shirts','pants','shoes']),
   'summer short → shirts → black pants → red shoes. Each: typed search, product out of its tile, held about a second, into the bag. The cart badge counts up with each one.', 'Same push every time.', 'Same sounds every time.', ''),
- ('7. The full bag is lifted onto the order screen', '17 – 19 s', frame('<div class="ph">Order / tracking screen<br><small>NEEDED from you</small></div><div class="bag up">bag</div>'),
-  'The bag is lifted out and onto SHEIN’s own order screen. Held for about a second. No invented screens: only a real SHEIN screen.', 'Camera follows the lift.', 'Bag lifted. Soft whoosh.', ''),
+ ('7. The full bag is lifted onto the order screen', '17 – 19 s', frame(img(S['cart'],'scr')+'<div class="bag up">bag</div>'),
+  'The bag is lifted out and onto SHEIN’s own cart screen. Held for about a second. Masked first: “Lebanon”, every price, the free-shipping and “Spend … get … OFF” lines. The status bar (time, battery) is cropped on every screen.', 'Camera follows the lift.', 'Bag lifted. Soft whoosh.', ''),
  ('8. The blade cut', '19 – 19.8 s', frame('<div class="cut"></div>'),
   'A single blade cut across the order screen. It opens onto the closing line.', 'Locked off.', 'Dagger whoosh.', ''),
  ('9. Closing line + handle', '19.8 – 24 s', frame('<div class="end"><b>Find your style<br>and shop your favorites<br>on SHEIN.</b><div class="hd">@shein by siya</div><div class="spec">Personal concept · not an official SHEIN ad</div></div>', 'dark'),
@@ -39,7 +39,7 @@ for t, tm, fr, what, cam, snd, vo in beats:
     v = ('<dt>Voice</dt><dd>' + vo + '</dd>') if vo else ''
     cards += ('<section class="card"><div class="left">' + f + '</div><div class="right"><h3>' + t + ' <em>' + tm + '</em></h3><p>' + what +
               '</p><dl><dt>Camera</dt><dd>' + cam + '</dd><dt>Sound</dt><dd>' + snd + '</dd>' + v + '</dl></div></section>')
-strip = ''.join(f'<figure>{img(T[k])}<figcaption>{n}</figcaption></figure>' for k, n in [('halloween','halloween deals'),('shorts','summer short'),('shirts','shirts'),('shoes','red shoes')])
+strip = ''.join(f'<figure>{img(T[k])}<figcaption>{n}</figcaption></figure>' for k, n in [('halloween','halloween deals'),('shorts','summer short'),('shirts','shirts'),('pants','black pants'),('shoes','red shoes')])
 page = f'''<!doctype html><html lang="en"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>SHEIN by siya storyboard</title>
 <style>
 :root{{--bg:#fff;--fg:#111;--mut:#666;--card:#f5f5f7;--ac:#111}}@media(prefers-color-scheme:dark){{:root{{--bg:#111;--fg:#f2f2f2;--mut:#aaa;--card:#1d1d20;--ac:#fff}}}}
@@ -51,7 +51,7 @@ dl{{display:grid;grid-template-columns:70px 1fr;gap:4px 8px;font-size:14px;margi
 .fr{{position:relative;width:216px;height:384px;background:#fff;border-radius:12px;overflow:hidden;color:#111}}.fr.dark{{background:#222;color:#fff}}
 .fr img.scr{{width:100%;height:100%;object-fit:cover;object-position:top}}.bar{{width:100%;margin-top:30px}}
 .ph,.bag{{position:absolute;inset:60px 20px;border:2px dashed #aaa;border-radius:12px;display:grid;place-content:center;text-align:center;font-weight:600;background:#eee}}
-.ph small,.bag small,.miss small{{font-weight:400;color:#c00}}.blur .ph{{filter:blur(2px)}}
+.ph small,.bag small,.miss small{{font-weight:400;color:#c00}}.blur .ph,.blur img.scr{{filter:blur(2px)}}
 .q{{position:absolute;left:0;right:0;top:150px;text-align:center;font:700 26px/1.2 system-ui;animation:fade 3s infinite}}.q.small{{font-size:14px;top:80px}}
 .type{{position:absolute;left:34px;top:62px;font-size:14px}}.type span{{animation:blink 1s infinite}}
 .lift{{position:absolute;left:30px;top:80px;width:156px;border-radius:10px;box-shadow:0 10px 24px #0006;animation:lift 3s infinite}}
@@ -68,10 +68,9 @@ figure{{display:inline-block;margin:6px;width:150px;text-align:center;font-size:
 <h2>Beats</h2>{cards}
 <h2>Sound</h2><p>Real foley only: iPhone key clicks · plastic bag rustle · a filled bag landing · a bag lifted · a soft air whoosh · a dagger whoosh for the cut · one deep hit at the start and the end. Voice: natural, youthful, female, one voice, you pick the takes by ear.<br><b>Never:</b> music, bubbles, dings, springs, risers, cartoon sounds.</p>
 <h2>Rules I’m following from your brief</h2><p>No invented prices, discounts, specs or claims — every discount, coupon, “Save $”, sold-count and price on the SHEIN screens is covered or cropped. No “safest place to order”. Handle exactly <b>@shein by siya</b>, small for the whole film. Last frame says it’s a personal concept, not official.</p>
-<h2>Still needed from you</h2><div class="warn"><ul><li><b>Black pants</b> search results screenshot (same style as the others).</li><li><b>SHEIN home screen</b> (the opening background) and an <b>order / tracking / cart screen</b> (the lift-and-cut background). Please close any coupon or app-download banner before the screenshot.</li><li>Your screenshot with the <b>keyboard and recent searches</b> (CCTV camera…) is not used: it shows your private search history.</li></ul></div>
-<h2>Decisions</h2><p><b>A. Product photos.</b> <i>Recommended:</i> send the product page images (save the main photo of each pick at full size), so I can cut them out cleanly. <i>Fallback:</i> use the tile photos from your screenshots as rounded cards that lift out (no cut-out; softer, with models and backgrounds).<br>
+<h2>Screens received</h2><p>Home, cart, and the five searches (halloween deals, summer short, shirts, black pant, red shoes). Nothing else is needed from you except decision A and your OK.</p><h2>Decisions</h2><p><b>A. Product photos.</b> <i>Recommended:</i> send the product page images (save the main photo of each pick at full size), so I can cut them out cleanly. <i>Fallback:</i> use the tile photos from your screenshots as rounded cards that lift out (no cut-out; softer, with models and backgrounds).<br>
 <b>B. The container.</b> <i>Recommended:</i> a plain shopping bag in SHEIN’s black/white with the SHEIN wordmark, drawn from the logo on SHEIN’s site. SHEIN’s own bag photo if you can send one.<br>
 <b>C. Length.</b> About 24 s at 4 s per product. A 15 s short cut is made too.<br>
-<b>D. Search term.</b> I kept your exact words (“summer short”, as in your screenshot).</p>
+<b>D. Search terms.</b> I kept your exact words as typed in your screenshots: “summer short”, “black pant”.<br><b>E. Home screen.</b> Its search hint reads “Black Pants For Women” (personalised to your account). It is covered by the typed question, so it never shows.</p>
 </main></html>'''
 open('storyboard.html','w').write(page); print(len(page)//1024,'KB')
