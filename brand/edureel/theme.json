@@ -1,0 +1,54 @@
+{
+  "brand": "EduReel | إديوريل",
+  "handle": "@edureel.studio",
+  "tagline_ar": "نُحوّل المعرفة والأفكار إلى ريلز تعليمية خاطفة.",
+  "source": "Sampled from the Instagram profile logo (screenshot, Oct 2026)",
+  "colors": {
+    "bg": "#0B0E14",
+    "bg_logo": "#11131C",
+    "surface": "#161A26",
+    "surface_line": "#2B2F37",
+    "cyan": "#3FE0F0",
+    "cyan_soft": "#6ACDDB",
+    "cyan_glow": "#AEFFFF",
+    "blue": "#5D9FC3",
+    "violet": "#7849B8",
+    "purple": "#9854C1",
+    "purple_glow": "#E2B3FC",
+    "magenta": "#D47EE5",
+    "magenta_glow": "#F8B8F9",
+    "text": "#FFFFFF",
+    "text_muted": "#B9BCC8"
+  },
+  "gradients": {
+    "brand": ["#3FE0F0", "#9854C1", "#D47EE5"],
+    "wordmark_edu": ["#6ACDDB", "#3FE0F0"],
+    "wordmark_reel": ["#9854C1", "#D47EE5"],
+    "ring": ["#3FE0F0", "#7849B8", "#D47EE5"],
+    "background": ["#161A26", "#0B0E14"]
+  },
+  "glow": {
+    "cyan": "0 0 6px #AEFFFF, 0 0 18px #3FE0F0, 0 0 42px rgba(63,224,240,.55)",
+    "purple": "0 0 6px #E2B3FC, 0 0 18px #9854C1, 0 0 42px rgba(152,84,193,.55)",
+    "magenta": "0 0 6px #F8B8F9, 0 0 18px #D47EE5, 0 0 42px rgba(212,126,229,.55)"
+  },
+  "fonts": {
+    "arabic": {"family": "Cairo", "file": "fonts/Cairo.ttf", "weights": "200–1000 (variable)", "use": "captions 800, headlines 900, labels 500"},
+    "latin": {"family": "Comfortaa", "file": "fonts/Comfortaa.ttf", "weights": "300–700 (variable)", "use": "rounded geometric, close to the EduReel wordmark"}
+  },
+  "captions": {
+    "file": "captions-theme.json",
+    "ink": "#FFFFFF",
+    "active_word": "#3FE0F0",
+    "stroke": "#000000",
+    "lines": 1,
+    "box": false
+  },
+  "motion": {
+    "look": "neon glow on deep navy, thin glowing rings and orbit lines, soft light particles",
+    "reveal": "word-by-word, blur 10px → 0 with a slight rise, 0.5 s each",
+    "accents": "cyan for key words, magenta for numbers and payoffs, purple for secondary lines",
+    "grain": "light (alls≈4)",
+    "frame": "thin 1.5px cyan→magenta gradient border with a soft outer glow"
+  }
+}

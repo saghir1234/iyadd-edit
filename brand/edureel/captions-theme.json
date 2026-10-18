@@ -1,0 +1,27 @@
+{
+  "font_path": "fonts/Cairo.ttf",
+  "font_family_and_style": [
+    "Cairo",
+    "Regular"
+  ],
+  "font_sha256": "667c987182391c91f4e57a2f455b1794fb5e3ee6ca4ef3383e86bb690fa9c964",
+  "captionSize": 52,
+  "captionMaxW": 860,
+  "safeSide": 110,
+  "overlay_y": 1280,
+  "max_lines": 1,
+  "background": false,
+  "ink": "#FFFFFF",
+  "active": "#3FE0F0",
+  "stroke_width": 2,
+  "stroke_color": "#000000",
+  "active_word_effect": "color_only",
+  "common_baseline": true,
+  "caption_mode": "ar",
+  "english_font_path": "fonts/Cairo.ttf",
+  "englishCaptionSize": 48,
+  "arabic_min_size": 44,
+  "english_min_size": 42,
+  "max_lines_per_language": 1,
+  "translation_delay_ms": 0
+}
