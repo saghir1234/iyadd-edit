@@ -43,4 +43,4 @@ Brand gradient: `#3FE0F0 → #9854C1 → #D47EE5` (cyan → purple → magenta).
 - `preview.html` / `preview.png`: visual reference
 - `logo-reference.png`: logo crop from the profile screenshot (low resolution, for reference only)
 
-To use it: ask Claude to "use the EduReel brand kit in `brand/edureel`" when editing a video.
+To use it: ask Claude to "use the EduReel brand kit in `brand/`" when editing a video.
