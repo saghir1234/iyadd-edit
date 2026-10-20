@@ -192,6 +192,7 @@ function buildCut(c){
 }
 
 function render(t){
+  const busy=items.some(it=>it.kind=='cut'&&t>=it.t0-0.05&&t<it.t1+0.05);document.getElementById('cap').style.opacity=busy?0:1;
   items.forEach(it=>{
     if(it.kind=='ident'){const p=ease((t-.4)/.6)*(1-ease((t-it.t1)/.5));it.e.style.opacity=p;it.e.style.transform=`translateX(${(1-p)*-20}px)`;return}
     if(it.kind=='head'){

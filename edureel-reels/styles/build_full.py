@@ -4,7 +4,7 @@ sys.path.insert(0, os.path.dirname(__file__))
 from build_base import phrases
 R = runpy.run_path(sys.argv[1])['REEL']
 spec = {'duration': R['duration'], 'identity': R['identity'], 'phrases': phrases(R['words'], R['duration']),
-        'overlays': R.get('overlays', []), 'scenes': R.get('scenes', [])}
+        'overlays': R.get('overlays', []), 'scenes': R.get('scenes', []), 'flashes': R.get('flashes', [])}
 json.dump(spec, open(sys.argv[2], 'w'), ensure_ascii=False, indent=1)
 def ts(x):
     ms = int(round(x * 1000)); return f'{ms//3600000:02}:{ms//60000%60:02}:{ms//1000%60:02},{ms%1000:03}'

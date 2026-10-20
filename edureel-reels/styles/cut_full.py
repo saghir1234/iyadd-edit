@@ -8,7 +8,7 @@ for i, (s, e, crop) in enumerate(rs):
     d = e - s; pre = min(2, s)
     ins += ['-ss', f'{s - pre:.3f}', '-i', src]
     fc.append(f'[{i}:v]trim=start={pre}:duration={d:.3f},setpts=PTS-STARTPTS,crop={crop},hqdn3d=1.5:1.5:6:6,'
-              f'scale=1080:1920:flags=lanczos,unsharp=5:5:0.7:3:3:0.0,'
+              f'scale=1080:1920:flags=lanczos,setsar=1,unsharp=5:5:0.7:3:3:0.0,'
               f'{GRADE},fps=30[v{i}];'
               f'[{i}:a]atrim=start={pre}:duration={d:.3f},asetpts=PTS-STARTPTS,afade=t=in:d=0.02,afade=t=out:st={d - 0.04:.3f}:d=0.04[a{i}]')
 n = len(rs)
