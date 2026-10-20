@@ -11,22 +11,22 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 LIB = os.environ.get('SFX_LIB', os.path.join(os.path.dirname(HERE), 'sounds'))
 # cue -> list of (file, trim_start, trim_end, anchor_in_trimmed_clip); every sound comes from the user's library
 KITMAP = {
- 'whoosh': [('Whoosh 1.wav', 0, 2.4, .65), ('Whoosh 2.wav', 0, 2.2, .65), ('Whoosh 3.wav', 0, 2.5, .70), ('Whoosh.wav', 0, 2.4, .90), ('imnotcreating sfx Swoosh.mp3', 0, 1.6, .50)],
- 'back':   [('Soft Whoosh 01.wav', 0, 1.4, .40), ('Soft Whoosh 02.wav', 0, 1.4, .30), ('Soft Whoosh 03.wav', 0, 2.0, .75), ('Soft Whoosh 05.wav', 0, 1.8, .70)],
- 'swish':  [('Clean whoosh.mp4', 0, .7, .25), ('whoosh snap.wav', 0, 1.4, .45)],
- 'impact': [('Impact.wav', 0, 1.1, .02), ('Impact Sound Effect.mp3', .3, 1.25, .05)],
+ 'whoosh': [('Whoosh 1.flac', 0, 2.4, .65), ('Whoosh 2.flac', 0, 2.2, .65), ('Whoosh 3.flac', 0, 2.5, .70), ('Whoosh.flac', 0, 2.4, .90), ('imnotcreating sfx Swoosh.mp3', 0, 1.6, .50)],
+ 'back':   [('Soft Whoosh 01.flac', 0, 1.4, .40), ('Soft Whoosh 02.flac', 0, 1.4, .30), ('Soft Whoosh 03.flac', 0, 2.0, .75), ('Soft Whoosh 05.flac', 0, 1.8, .70)],
+ 'swish':  [('Clean whoosh.mp4', 0, .7, .25), ('whoosh snap.flac', 0, 1.4, .45)],
+ 'impact': [('Impact.flac', 0, 1.1, .02), ('Impact Sound Effect.mp3', .3, 1.25, .05)],
  'boom':   [('Bass Drop.mp4', 0, 2.79, .02)],
- 'thud':   [('Echo Snap.wav', .12, 1.6, .03), ('imnotcreating sfx Switch.mp3', 0, .7, .02)],
- 'pop':    [('imnotcreating sfx Clic souris.wav', .15, .5, .03), ('Digital Camera click.wav', 0, .13, 0), ('Click.wav', 0, .4, 0)],
- 'tick':   [('imnotcreating sfx Bip autofocus.wav', 0, .23, 0), ('Digital autofocus.wav', 0, .07, 0)],
- 'shimmer':[('Shine.wav', 0, 1.0, .1), ('Glass Shine.mp4', 0, .96, .1), ('Precious Stone 01.wav', 0, 2.2, .1)],
- 'riser':  [('Low Rise.mp4', 0, 1.0, .95), ('Riser.wav', 0, 2.3, 1.7), ('Inertia Ramp.mp4', 0, 1.7, 1.1)],
+ 'thud':   [('Echo Snap.flac', .12, 1.6, .03), ('imnotcreating sfx Switch.mp3', 0, .7, .02)],
+ 'pop':    [('imnotcreating sfx Clic souris.flac', .15, .5, .03), ('Digital Camera click.flac', 0, .13, 0), ('Click.flac', 0, .4, 0)],
+ 'tick':   [('imnotcreating sfx Bip autofocus.flac', 0, .23, 0), ('Digital autofocus.flac', 0, .07, 0)],
+ 'shimmer':[('Shine.flac', 0, 1.0, .1), ('Glass Shine.mp4', 0, .96, .1), ('Precious Stone 01.flac', 0, 2.2, .1)],
+ 'riser':  [('Low Rise.mp4', 0, 1.0, .95), ('Riser.flac', 0, 2.3, 1.7), ('Inertia Ramp.mp4', 0, 1.7, 1.1)],
  'flash':  [('Camera Flash.wav', 0, 1.2, .2)],
  'tear':   [('Page Flip.mp4', 0, 1.7, .9)],
  'scroll': [('Clean whoosh.mp4', 0, .7, .25)],
- 'down':   [('Glitch.wav', 0, 1.0, .2)],
- 'drone':  [('Suspense Riser .wav', 0, 3.0, 0)],
- 'gears':  [('imnotcreating sfx Engrenages.wav', 0, .75, 0)],
+ 'down':   [('Glitch.flac', 0, 1.0, .2)],
+ 'drone':  [('Suspense Riser .flac', 0, 3.0, 0)],
+ 'gears':  [('imnotcreating sfx Engrenages.flac', 0, .75, 0)],
 }
 _cache = {}
 def load_clip(f, a, b):
