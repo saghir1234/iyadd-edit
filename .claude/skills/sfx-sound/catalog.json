@@ -1,0 +1,527 @@
+{
+ "note": "times in seconds; onset = first sound, peak = loudest point (align this with the motion), peak_dbfs = loudest sample. Normalise before mixing.",
+ "sounds": [
+  {
+   "file": "Camera Charge.mp4",
+   "dur": 1.37,
+   "onset": 0.1,
+   "peak": 0.13,
+   "peak_dbfs": -11.2,
+   "category": "camera",
+   "use": "flash charging whine (before a flash)"
+  },
+  {
+   "file": "Camera Flash.wav",
+   "dur": 1.16,
+   "onset": 0.25,
+   "peak": 0.27,
+   "peak_dbfs": -1.0,
+   "category": "camera",
+   "use": "flash to a white card"
+  },
+  {
+   "file": "Camera Shutter Sound Effect.mp3",
+   "dur": 5.22,
+   "onset": 0.4,
+   "peak": 0.47,
+   "peak_dbfs": -1.3,
+   "category": "camera",
+   "use": "several shutter clicks; trim one"
+  },
+  {
+   "file": "Digital Camera Power On.wav",
+   "dur": 0.54,
+   "onset": 0.17,
+   "peak": 0.17,
+   "peak_dbfs": -3.8,
+   "category": "camera",
+   "use": "power-on chirp"
+  },
+  {
+   "file": "shutter beep 2.wav",
+   "dur": 0.59,
+   "onset": 0.0,
+   "peak": 0.21,
+   "peak_dbfs": -2.5,
+   "category": "camera",
+   "use": "shutter with beep"
+  },
+  {
+   "file": "shutter discret.wav",
+   "dur": 0.23,
+   "onset": 0.0,
+   "peak": 0.13,
+   "peak_dbfs": 0.6,
+   "category": "camera",
+   "use": "discreet shutter: freeze-frame, photo"
+  },
+  {
+   "file": "Cash Register Sound Effect.mp3",
+   "dur": 1.91,
+   "onset": 0.33,
+   "peak": 0.8,
+   "peak_dbfs": -1.1,
+   "category": "click-ui",
+   "use": "money / price / profit (playful)"
+  },
+  {
+   "file": "Click Sound Effect.mp3",
+   "dur": 2.12,
+   "onset": 1.18,
+   "peak": 1.18,
+   "peak_dbfs": -0.1,
+   "category": "click-ui",
+   "use": "single click at 1.18 s"
+  },
+  {
+   "file": "Click.wav",
+   "dur": 0.44,
+   "onset": 0.0,
+   "peak": 0.06,
+   "peak_dbfs": 2.5,
+   "category": "click-ui",
+   "use": "text pop-in"
+  },
+  {
+   "file": "Digital Camera click.wav",
+   "dur": 0.13,
+   "onset": 0.01,
+   "peak": 0.02,
+   "peak_dbfs": -4.5,
+   "category": "click-ui",
+   "use": "tiny crisp click: word pop-in"
+  },
+  {
+   "file": "Digital autofocus.wav",
+   "dur": 0.07,
+   "onset": 0.02,
+   "peak": 0.02,
+   "peak_dbfs": -17.3,
+   "category": "click-ui",
+   "use": "micro tick, very quiet (-17 dBFS): checkmarks, counters"
+  },
+  {
+   "file": "Ding Sound Effect.mp3",
+   "dur": 0.99,
+   "onset": 0.14,
+   "peak": 0.2,
+   "peak_dbfs": -3.1,
+   "category": "click-ui",
+   "use": "ding: correct / done (playful)"
+  },
+  {
+   "file": "imnotcreating sfx Bip autofocus.wav",
+   "dur": 0.23,
+   "onset": 0.0,
+   "peak": 0.0,
+   "peak_dbfs": -9.3,
+   "category": "click-ui",
+   "use": "beep tick: counters, checks"
+  },
+  {
+   "file": "imnotcreating sfx Clic souris.wav",
+   "dur": 0.52,
+   "onset": 0.2,
+   "peak": 0.2,
+   "peak_dbfs": 1.1,
+   "category": "click-ui",
+   "use": "mouse click at 0.2 s: text pop-in"
+  },
+  {
+   "file": "imnotcreating sfx Engrenages.wav",
+   "dur": 0.75,
+   "onset": 0.0,
+   "peak": 0.08,
+   "peak_dbfs": -0.0,
+   "category": "click-ui",
+   "use": "gears: loop, process, mechanism"
+  },
+  {
+   "file": "imnotcreating sfx Menu UI.mp3",
+   "dur": 2.43,
+   "onset": 0.21,
+   "peak": 0.51,
+   "peak_dbfs": -4.2,
+   "category": "click-ui",
+   "use": "UI blips: cards / menus appearing"
+  },
+  {
+   "file": "imnotcreating sfx Switch.mp3",
+   "dur": 0.83,
+   "onset": 0.05,
+   "peak": 0.06,
+   "peak_dbfs": 0.0,
+   "category": "click-ui",
+   "use": "switch/toggle: stamps, state changes"
+  },
+  {
+   "file": "Glitch.wav",
+   "dur": 2.0,
+   "onset": 0.0,
+   "peak": 0.26,
+   "peak_dbfs": 0.6,
+   "category": "glitch",
+   "use": "glitch: digital error, light flicker, distortion"
+  },
+  {
+   "file": "Impact Sound Effect.mp3",
+   "dur": 3.47,
+   "onset": 0.4,
+   "peak": 2.92,
+   "peak_dbfs": -5.0,
+   "category": "impact",
+   "use": "4 separate hits in one file (≈0.4, 1.2, 2.0, 2.9 s); trim one"
+  },
+  {
+   "file": "Impact.wav",
+   "dur": 1.12,
+   "onset": 0.03,
+   "peak": 0.28,
+   "peak_dbfs": -12.4,
+   "category": "impact",
+   "use": "key word punch-in, quiet file (-12 dBFS): raise gain"
+  },
+  {
+   "file": "Bass Drop.mp4",
+   "dur": 2.79,
+   "onset": 0.04,
+   "peak": 0.11,
+   "peak_dbfs": 3.0,
+   "category": "impact-big",
+   "use": "the big payoff / last key line / hook"
+  },
+  {
+   "file": "SFX - Explosion 21 Energy.mp3",
+   "dur": 3.05,
+   "onset": 0.02,
+   "peak": 0.29,
+   "peak_dbfs": -2.5,
+   "category": "impact-big",
+   "use": "energy burst, very strong"
+  },
+  {
+   "file": "Thunder opener.mp4",
+   "dur": 2.3,
+   "onset": 0.36,
+   "peak": 0.94,
+   "peak_dbfs": 3.1,
+   "category": "impact-big",
+   "use": "dramatic opener"
+  },
+  {
+   "file": "black ops 2 semtex.wav",
+   "dur": 6.48,
+   "onset": 0.97,
+   "peak": 4.53,
+   "peak_dbfs": -8.6,
+   "category": "impact-big",
+   "use": "game explosion with beeps (peak 4.5 s); use sparingly"
+  },
+  {
+   "file": "Echo Snap.wav",
+   "dur": 3.2,
+   "onset": 0.17,
+   "peak": 0.17,
+   "peak_dbfs": -8.2,
+   "category": "impact-light",
+   "use": "stamp / snap with echo tail: calligraphy stamp, tag word"
+  },
+  {
+   "file": "Drum Roll.mp4",
+   "dur": 1.54,
+   "onset": 0.18,
+   "peak": 0.39,
+   "peak_dbfs": 0.3,
+   "category": "meme",
+   "use": "short drum roll (playful)"
+  },
+  {
+   "file": "Fahh Sound Effect.mp3",
+   "dur": 4.52,
+   "onset": 1.05,
+   "peak": 1.07,
+   "peak_dbfs": -1.9,
+   "category": "meme",
+   "use": "meme \"fahh\" (comedic), not for serious reels"
+  },
+  {
+   "file": "Page Flip.mp4",
+   "dur": 1.71,
+   "onset": 0.11,
+   "peak": 1.07,
+   "peak_dbfs": -3.9,
+   "category": "paper",
+   "use": "page flip / paper tear (peak 1.07 s)"
+  },
+  {
+   "file": "Inertia Ramp.mp4",
+   "dur": 1.77,
+   "onset": 0.13,
+   "peak": 1.13,
+   "peak_dbfs": -1.7,
+   "category": "riser",
+   "use": "pulsing ramp landing at 1.13 s"
+  },
+  {
+   "file": "Low Rise.mp4",
+   "dur": 1.02,
+   "onset": 0.02,
+   "peak": 0.87,
+   "peak_dbfs": -5.9,
+   "category": "riser",
+   "use": "short 1 s riser landing at 0.87 s"
+  },
+  {
+   "file": "Metallic Riser.mp4",
+   "dur": 2.43,
+   "onset": 0.19,
+   "peak": 0.33,
+   "peak_dbfs": -6.6,
+   "category": "riser",
+   "use": "metallic hit then ring"
+  },
+  {
+   "file": "Metallic Riser.wav",
+   "dur": 3.81,
+   "onset": 1.06,
+   "peak": 2.21,
+   "peak_dbfs": -13.1,
+   "category": "riser",
+   "use": "metallic swell landing at 2.2 s"
+  },
+  {
+   "file": "Riser Sound Effect.mp3",
+   "dur": 5.28,
+   "onset": 2.8,
+   "peak": 5.17,
+   "peak_dbfs": -16.0,
+   "category": "riser",
+   "use": "long riser (peak 5.2 s)"
+  },
+  {
+   "file": "Riser.wav",
+   "dur": 2.79,
+   "onset": 1.27,
+   "peak": 1.69,
+   "peak_dbfs": -2.7,
+   "category": "riser",
+   "use": "riser that lands at 1.69 s: build into a reveal"
+  },
+  {
+   "file": "Suspense Riser .wav",
+   "dur": 4.56,
+   "onset": 1.53,
+   "peak": 2.7,
+   "peak_dbfs": -22.0,
+   "category": "riser",
+   "use": "slow suspense swell (peak 2.7 s), quiet: tension bed"
+  },
+  {
+   "file": "imnotcreating sfx Chargement.mp3",
+   "dur": 3.73,
+   "onset": 0.02,
+   "peak": 0.51,
+   "peak_dbfs": -12.0,
+   "category": "riser",
+   "use": "loading / progress sound"
+  },
+  {
+   "file": "imnotcreating sfx Riser verre.mp3",
+   "dur": 2.5,
+   "onset": 0.36,
+   "peak": 1.9,
+   "peak_dbfs": -15.7,
+   "category": "riser",
+   "use": "glassy riser landing at 1.9 s"
+  },
+  {
+   "file": "silex riser.mp3",
+   "dur": 3.21,
+   "onset": 0.68,
+   "peak": 1.83,
+   "peak_dbfs": 0.1,
+   "category": "riser",
+   "use": "riser landing at 1.83 s"
+  },
+  {
+   "file": "Glass Shine.mp4",
+   "dur": 0.96,
+   "onset": 0.02,
+   "peak": 0.35,
+   "peak_dbfs": 3.0,
+   "category": "shine",
+   "use": "glassy shine: reveal of a key word or object"
+  },
+  {
+   "file": "Precious Stone 01.wav",
+   "dur": 2.2,
+   "onset": 0.03,
+   "peak": 0.18,
+   "peak_dbfs": -15.7,
+   "category": "shine",
+   "use": "soft chime sparkle"
+  },
+  {
+   "file": "Shine.wav",
+   "dur": 1.0,
+   "onset": 0.08,
+   "peak": 0.38,
+   "peak_dbfs": -18.0,
+   "category": "shine",
+   "use": "sparkle: glow, light, highlight (quiet, -18 dBFS)"
+  },
+  {
+   "file": "imnotcreating sfx Eclat de verre.mp3",
+   "dur": 4.62,
+   "onset": 1.15,
+   "peak": 1.22,
+   "peak_dbfs": 1.7,
+   "category": "shine",
+   "use": "glass shard / shatter at 1.2 s: break, crack"
+  },
+  {
+   "file": "Soft Whoosh 01.wav",
+   "dur": 1.54,
+   "onset": 0.27,
+   "peak": 0.44,
+   "peak_dbfs": -6.3,
+   "category": "soft-transition",
+   "use": "gentle return from a motion graphic to the speaker"
+  },
+  {
+   "file": "Soft Whoosh 02.wav",
+   "dur": 1.73,
+   "onset": 0.17,
+   "peak": 0.3,
+   "peak_dbfs": -1.0,
+   "category": "soft-transition",
+   "use": "gentle return / subtle text slide"
+  },
+  {
+   "file": "Soft Whoosh 03.wav",
+   "dur": 2.62,
+   "onset": 0.35,
+   "peak": 0.78,
+   "peak_dbfs": -10.8,
+   "category": "soft-transition",
+   "use": "slow soft swell"
+  },
+  {
+   "file": "Soft Whoosh 05.wav",
+   "dur": 2.0,
+   "onset": 0.22,
+   "peak": 0.72,
+   "peak_dbfs": -9.3,
+   "category": "soft-transition",
+   "use": "slow soft swell"
+  },
+  {
+   "file": "Whoosh 1.wav",
+   "dur": 3.3,
+   "onset": 0.36,
+   "peak": 0.72,
+   "peak_dbfs": -7.9,
+   "category": "transition",
+   "use": "scene change / cut into a full-screen motion graphic"
+  },
+  {
+   "file": "Whoosh 2.wav",
+   "dur": 3.37,
+   "onset": 0.39,
+   "peak": 0.68,
+   "peak_dbfs": -3.6,
+   "category": "transition",
+   "use": "scene change, a bit brighter"
+  },
+  {
+   "file": "Whoosh 3.wav",
+   "dur": 3.97,
+   "onset": 0.3,
+   "peak": 0.64,
+   "peak_dbfs": -4.7,
+   "category": "transition",
+   "use": "scene change, longer tail"
+  },
+  {
+   "file": "Whoosh Sound Effect.mp3",
+   "dur": 5.93,
+   "onset": 0.18,
+   "peak": 5.27,
+   "peak_dbfs": 2.8,
+   "category": "transition",
+   "use": "pack of 7 short whooshes in one file; trim the one you need"
+  },
+  {
+   "file": "Whoosh.wav",
+   "dur": 5.15,
+   "onset": 0.45,
+   "peak": 0.97,
+   "peak_dbfs": 0.4,
+   "category": "transition",
+   "use": "big scene change / opening"
+  },
+  {
+   "file": "imnotcreating sfx Swoosh.mp3",
+   "dur": 3.19,
+   "onset": 0.41,
+   "peak": 2.16,
+   "peak_dbfs": -1.3,
+   "category": "transition",
+   "use": "two swooshes (first at 0.5 s, second at 2.16 s); trim one"
+  },
+  {
+   "file": "Clean whoosh.mp4",
+   "dur": 0.7,
+   "onset": 0.04,
+   "peak": 0.29,
+   "peak_dbfs": 3.2,
+   "category": "transition-short",
+   "use": "short swipe: card or text sliding in"
+  },
+  {
+   "file": "whoosh snap.wav",
+   "dur": 2.21,
+   "onset": 0.26,
+   "peak": 0.46,
+   "peak_dbfs": 2.7,
+   "category": "transition-short",
+   "use": "swipe that ends on a snap: tag word, slash line"
+  },
+  {
+   "file": "Computer Keyboard Pressing Keys.wav",
+   "dur": 24.97,
+   "onset": 0.24,
+   "peak": 18.5,
+   "peak_dbfs": -3.8,
+   "category": "typing",
+   "use": "25 s keyboard typing bed: trim"
+  },
+  {
+   "file": "Phone typing(1).wav",
+   "dur": 2.72,
+   "onset": 0.01,
+   "peak": 1.62,
+   "peak_dbfs": -8.5,
+   "category": "typing",
+   "use": "short phone typing"
+  },
+  {
+   "file": "phone typing.wav",
+   "dur": 19.62,
+   "onset": 0.21,
+   "peak": 0.73,
+   "peak_dbfs": -1.6,
+   "category": "typing",
+   "use": "20 s phone typing: text being typed on screen"
+  },
+  {
+   "file": "typing perso.wav",
+   "dur": 8.27,
+   "onset": 0.73,
+   "peak": 1.99,
+   "peak_dbfs": -2.3,
+   "category": "typing",
+   "use": "8 s typing"
+  }
+ ]
+}
