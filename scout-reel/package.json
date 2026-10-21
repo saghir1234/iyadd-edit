@@ -1,0 +1,20 @@
+{
+  "name": "scout-reel",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio",
+    "render": "bash scripts/render.sh"
+  },
+  "dependencies": {
+    "@fontsource/cairo": "^5.1.0",
+    "@fontsource/tajawal": "^5.1.0",
+    "@remotion/bundler": "4.0.527",
+    "@remotion/cli": "4.0.527",
+    "@remotion/renderer": "4.0.527",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "remotion": "4.0.527"
+  }
+}
