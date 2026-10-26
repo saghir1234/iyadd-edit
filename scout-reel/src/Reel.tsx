@@ -7,9 +7,9 @@ import WORDS from './words.json';
 
 export const FPS = 30;
 export const DURATION = 974;
-const W = 1080, H = 1920;
-const GOLD = '#FFC93C', GOLD2 = '#FF9F1C', RED = '#FF2D3A', INK = '#0B0D12';
-const FONT = 'Cairo, sans-serif';
+export const W = 1080, H = 1920;
+export const GOLD = '#FFC93C', GOLD2 = '#FF9F1C', RED = '#FF2D3A', INK = '#0B0D12';
+export const FONT = 'Cairo, sans-serif';
 
 // ─── fonts ───────────────────────────────────────────────────────────────────
 let fontsStarted = false;
@@ -26,23 +26,23 @@ const loadFonts = () => {
 loadFonts();
 
 // ─── time helpers ────────────────────────────────────────────────────────────
-const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
-const prog = (t: number, a: number, b: number) => clamp((t - a) / (b - a));
-const lerp = (a: number, b: number, p: number) => a + (b - a) * p;
-const eOut = (p: number) => 1 - Math.pow(1 - p, 3);
-const eIn = (p: number) => p * p * p;
-const eIO = (p: number) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
-const back = (p: number) => { const c = 1.9; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
+export const clamp = (x: number, a = 0, b = 1) => Math.min(b, Math.max(a, x));
+export const prog = (t: number, a: number, b: number) => clamp((t - a) / (b - a));
+export const lerp = (a: number, b: number, p: number) => a + (b - a) * p;
+export const eOut = (p: number) => 1 - Math.pow(1 - p, 3);
+export const eIn = (p: number) => p * p * p;
+export const eIO = (p: number) => (p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2);
+export const back = (p: number) => { const c = 1.9; return 1 + (c + 1) * Math.pow(p - 1, 3) + c * Math.pow(p - 1, 2); };
 // closed-form damped spring 0 → 1
-const spring = (t: number, t0: number, f = 2.2, z = 0.5) => {
+export const spring = (t: number, t0: number, f = 2.2, z = 0.5) => {
   const d = t - t0;
   if (d <= 0) return 0;
   const w = 2 * Math.PI * f, wd = w * Math.sqrt(1 - z * z);
   return 1 - Math.exp(-z * w * d) * (Math.cos(wd * d) + ((z * w) / wd) * Math.sin(wd * d));
 };
 // in at a, out at b: 0 → 1 → 0
-const life = (t: number, a: number, b: number, fi = 0.25, fo = 0.25) => Math.min(eOut(prog(t, a, a + fi)), 1 - eIn(prog(t, b - fo, b)));
-const rnd = (i: number) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
+export const life = (t: number, a: number, b: number, fi = 0.25, fo = 0.25) => Math.min(eOut(prog(t, a, a + fi)), 1 - eIn(prog(t, b - fo, b)));
+export const rnd = (i: number) => { const x = Math.sin(i * 127.1 + 311.7) * 43758.5453; return x - Math.floor(x); };
 
 // ─── words: the transcript, spelled as written ───────────────────────────────
 type Wd = {w: string; s: number; e: number};
@@ -94,7 +94,7 @@ const Speaker: React.FC<{t: number}> = ({t}) => {
 };
 
 // ─── shared pieces ───────────────────────────────────────────────────────────
-const Glass: React.FC<{x: number; y: number; w: number; h: number; r?: number; style?: React.CSSProperties; children?: React.ReactNode; glow?: string}> =
+export const Glass: React.FC<{x: number; y: number; w: number; h: number; r?: number; style?: React.CSSProperties; children?: React.ReactNode; glow?: string}> =
   ({x, y, w, h, r = 36, style, children, glow}) => (
     <div style={{position: 'absolute', left: x - w / 2, top: y - h / 2, width: w, height: h, borderRadius: r,
       background: 'linear-gradient(160deg, rgba(40,44,56,0.92), rgba(14,16,22,0.94))', border: '2px solid rgba(255,255,255,0.14)',
@@ -102,12 +102,12 @@ const Glass: React.FC<{x: number; y: number; w: number; h: number; r?: number; s
       {children}
     </div>
   );
-const T: React.FC<{children: React.ReactNode; size: number; color?: string; weight?: number; style?: React.CSSProperties}> = ({children, size, color = '#fff', weight = 800, style}) => (
+export const T: React.FC<{children: React.ReactNode; size: number; color?: string; weight?: number; style?: React.CSSProperties}> = ({children, size, color = '#fff', weight = 800, style}) => (
   <div style={{fontFamily: FONT, fontSize: size, fontWeight: weight, color, direction: 'rtl', lineHeight: 1.25, whiteSpace: 'nowrap', ...style}}>{children}</div>
 );
-const glowText = (c: string) => `0 0 18px ${c}, 0 0 42px ${c}, 0 4px 0 rgba(0,0,0,0.35)`;
+export const glowText = (c: string) => `0 0 18px ${c}, 0 0 42px ${c}, 0 4px 0 rgba(0,0,0,0.35)`;
 // pop in with overshoot + blur
-const popStyle = (t: number, t0: number, dur = 0.35): React.CSSProperties => {
+export const popStyle = (t: number, t0: number, dur = 0.35): React.CSSProperties => {
   const p = prog(t, t0, t0 + dur);
   return {opacity: clamp(p * 3), transform: `scale(${lerp(0.6, 1, back(p))})`, filter: `blur(${(1 - eOut(p)) * 10}px)`};
 };
@@ -211,7 +211,7 @@ const Question: React.FC<{t: number}> = ({t}) => {
     </AbsoluteFill>
   );
 };
-const Glitch: React.FC<{t: number; t0: number; dur: number; children: React.ReactNode}> = ({t, t0, dur, children}) => {
+export const Glitch: React.FC<{t: number; t0: number; dur: number; children: React.ReactNode}> = ({t, t0, dur, children}) => {
   const g = t >= t0 && t < t0 + dur ? 1 - prog(t, t0, t0 + dur) * 0.6 : 0;
   if (!g) return <>{children}</>;
   const f = Math.floor(t * 30), dx = (rnd(f) - 0.5) * 60 * g;
@@ -229,7 +229,7 @@ const Glitch: React.FC<{t: number; t0: number; dur: number; children: React.Reac
 };
 
 // ─── 3. scouts tag + the golden rule medallion ───────────────────────────────
-const Lily: React.FC<{size: number; color: string}> = ({size, color}) => (
+export const Lily: React.FC<{size: number; color: string}> = ({size, color}) => (
   // scout fleur-de-lis, drawn by hand
   <svg width={size} height={size} viewBox="0 0 100 100">
     <g fill={color}>
@@ -351,7 +351,7 @@ const ScoutPhoto: React.FC<{t: number}> = ({t}) => {
 };
 
 // ─── 5. not a fantasy ideal → spiritual cleanliness ──────────────────────────
-const Sparkle: React.FC<{x: number; y: number; s: number; t: number; t0: number}> = ({x, y, s, t, t0}) => {
+export const Sparkle: React.FC<{x: number; y: number; s: number; t: number; t0: number}> = ({x, y, s, t, t0}) => {
   const p = prog(t, t0, t0 + 0.6), k = Math.sin(p * Math.PI);
   return (
     <svg width={s} height={s} viewBox="-10 -10 20 20" style={{position: 'absolute', left: x - s / 2, top: y - s / 2, transform: `scale(${k}) rotate(${p * 90}deg)`, opacity: k}}>

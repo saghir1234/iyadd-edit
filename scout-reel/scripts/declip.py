@@ -9,12 +9,16 @@ while True:
 F = np.stack(F); N, H, W, _ = F.shape
 print("frames", N)
 mn = F.min(3)
-raw = mn > 228
+import os
+raw = mn > int(os.environ.get('THRESH', 228))
+if os.environ.get('BAND'):  # only look for captions inside this row band (y0,y1)
+    y0, y1 = map(int, os.environ['BAND'].split(','))
+    raw[:, :y0] = False; raw[:, y1:] = False
 # drop glasses glare: blobs in face band that are small
 T = np.load(sys.argv[3])
 T3 = np.tile(np.eye(3), (N, 1, 1)); T3[:, :2] = T
-T3[:165] = np.eye(3); T3[195:] = np.median(T3[195:], 0)
-for i in range(165, 195): T3[i] = T3[i]  # measured ramp
+if os.environ.get('STATIC'): T3[:] = np.eye(3)  # locked-off shot
+else: T3[:165] = np.eye(3); T3[195:] = np.median(T3[195:], 0)  # first reel: punch-in ramp at frames 165-195
 Tinv = np.linalg.inv(T3)
 M = np.zeros((N, H, W), bool)
 for i in range(N):
@@ -73,7 +77,7 @@ for i in range(N):
     a = cv2.GaussianBlur(m.astype(np.float32), (0, 0), 2.5)[..., None]
     outF[i] = (img * a + F[i] * (1 - a)).astype(np.uint8)
 np.save(out + ".mask.npy", np.packbits(Mt, axis=-1))
-p = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{W}x{H}", "-r", "30",
+p = subprocess.Popen(["ffmpeg", "-v", "error", "-y", "-f", "rawvideo", "-pix_fmt", "bgr24", "-s", f"{W}x{H}", "-r", os.environ.get("FPS", "30"),
                       "-i", "-", "-i", src, "-map", "0:v", "-map", "1:a", "-c:v", "libx264", "-crf", "14", "-preset", "medium",
                       "-pix_fmt", "yuv420p", "-c:a", "copy", out], stdin=subprocess.PIPE)
 p.stdin.write(outF.tobytes()); p.stdin.close(); p.wait()

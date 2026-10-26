@@ -2,3 +2,5 @@ node_modules/
 out/
 public/talk.mp4
 public/mix.wav
+public/survival/talk.mp4
+public/survival/mix.wav
